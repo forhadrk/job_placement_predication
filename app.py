@@ -73,9 +73,9 @@ if st.button("Predict Placement"):
         st.write(f"Placement Probability: **{prob:.2f}**")
 
         if prediction == 1:
-            st.success("🎉 Student is LIKELY PLACED")
+            st.success(f"🎉 Student is LIKELY PLACED {prediction}")
         else:
-            st.error("❌ Student is NOT LIKELY placed")
+            st.error(f"❌ Student is NOT LIKELY placed {prediction}")
 
     except AttributeError:
         # fallback if model doesn't support predict_proba
