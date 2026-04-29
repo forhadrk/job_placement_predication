@@ -63,19 +63,21 @@ if st.button("Predict Placement"):
         specialisation
     ]])
 
-    # Prediction probability (better than raw output)
     try:
-        prob = model.predict_proba(input_data)[0][1]  # probability of being placed
-        prediction = model.predict(input_data)[0]
+        # ✅ probability of class 1 (Placed)
+        prob = model.predict_proba(input_data)[0][1]
+
+        # Convert probability → class
+        prediction = 1 if prob >= 0.5 else 0
 
         st.subheader("📊 Result")
 
         st.write(f"Placement Probability: **{prob:.2f}**")
 
         if prediction == 1:
-            st.success(f"🎉 Student is LIKELY PLACED {prediction}")
+            st.success(f"🎉 Student is LIKELY PLACED ({prediction})")
         else:
-            st.error(f"❌ Student is NOT LIKELY placed {prediction}")
+            st.error(f"❌ Student is NOT LIKELY placed ({prediction})")
 
     except AttributeError:
         # fallback if model doesn't support predict_proba
